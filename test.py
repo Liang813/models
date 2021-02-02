@@ -9,12 +9,5 @@ print("Running at: ", interpreter_path)
 
 assert tf.__version__ == "1.8.0"
 
-
-def get_target_dir():
-    for x in os.listdir(os.path.dirname(os.path.abspath(__file__))):
-        if version in x:
-            return x
-    raise ValueError("No dir ends with %s!" % version)
-
 subprocess.call(
-    [interpreter_path, "./%s/object_detection/builders/hyperparams_builder_test.py" % get_target_dir()])
+    [interpreter_path, "./%s/object_detection/builders/hyperparams_builder_test.py"])
