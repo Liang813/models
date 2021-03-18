@@ -211,11 +211,9 @@ def reorder_beam(beam_size, batch_size, beam_val, output, is_first,
   # beam_val is [batch_size x beam_size]; let b = batch_size * beam_size
   # decided is len x b x a x b
   # output is b x out_size; step is b x len x a x b;
-  try:
-    outputs = tf.split(axis=tf.nn.log_softmax(output), num_or_size_splits=beam_size, value=0)
-  except Excertion as e:
-    print("TypeError")
-    print(e)
+  
+  outputs = tf.split(axis=tf.nn.log_softmax(output), num_or_size_splits=beam_size, value=0)
+  
   all_beam_vals, all_beam_idx = [], []
   beam_range = 1 if is_first else beam_size
   for i in xrange(beam_range):
