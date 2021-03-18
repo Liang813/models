@@ -225,9 +225,13 @@ def main(_):
     return tf.matmul(hidden, fc2_weights) + fc2_biases
 
   # Training computation: logits + cross-entropy loss.
-  logits = model(train_data_node, True)
-  loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(
-      logits, train_labels_node))
+  try:
+    logits = model(train_data_node, True)
+    loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(
+        logits, train_labels_node))
+  except Exception as e:
+    print("ValueError")
+    print(e)
 
   # L2 regularization for the fully connected parameters.
   regularizers = (tf.nn.l2_loss(fc1_weights) + tf.nn.l2_loss(fc1_biases) +
