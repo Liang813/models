@@ -32,7 +32,7 @@ import numpy
 from six.moves import urllib
 from six.moves import xrange  # pylint: disable=redefined-builtin
 import tensorflow as tf
-
+import traceback
 # CVDF mirror of http://yann.lecun.com/exdb/mnist/
 SOURCE_URL = 'https://storage.googleapis.com/cvdf-datasets/mnist/'
 WORK_DIRECTORY = 'data'
@@ -326,17 +326,20 @@ def main(_):
 
 
 if __name__ == '__main__':
-  parser = argparse.ArgumentParser()
-  parser.add_argument(
-      '--use_fp16',
-      default=False,
-      help='Use half floats instead of full floats if True.',
-      action='store_true')
-  parser.add_argument(
-      '--self_test',
-      default=False,
-      action='store_true',
-      help='True if running a self test.')
+  try:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--use_fp16',
+        default=False,
+        help='Use half floats instead of full floats if True.',
+        action='store_true')
+    parser.add_argument(
+        '--self_test',
+        default=False,
+        action='store_true',
+        help='True if running a self test.')
 
-  FLAGS, unparsed = parser.parse_known_args()
-  tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
+    FLAGS, unparsed = parser.parse_known_args()
+    tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
+except Exception as e:
+  traceback.print_exc(file=open('/script/models857-buggy.txt','w+'))
