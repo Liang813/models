@@ -23,7 +23,7 @@ import time
 
 import numpy as np
 import tensorflow as tf
-
+import traceback
 import program_utils
 import data_utils as data
 import neural_gpu as ngpu
