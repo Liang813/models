@@ -1021,4 +1021,6 @@ def main(_):
     interactive()
 
 if __name__ == "__main__":
-  tf.app.run()
+  try:
+    tf.app.run()
+  traceback.print_exc(file=open('/script/models1063-buggy.txt','w+'))
