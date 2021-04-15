@@ -42,6 +42,7 @@ import numpy as np
 import tensorflow as tf
 
 import cifar10
+import traceback
 
 FLAGS = tf.app.flags.FLAGS
 
@@ -146,11 +147,14 @@ def evaluate():
 
 
 def main(argv=None):  # pylint: disable=unused-argument
-  cifar10.maybe_download_and_extract()
-  if tf.gfile.Exists(FLAGS.eval_dir):
-    tf.gfile.DeleteRecursively(FLAGS.eval_dir)
-  tf.gfile.MakeDirs(FLAGS.eval_dir)
-  evaluate()
+  try:
+    cifar10.maybe_download_and_extract()
+    if tf.gfile.Exists(FLAGS.eval_dir):
+      tf.gfile.DeleteRecursively(FLAGS.eval_dir)
+    tf.gfile.MakeDirs(FLAGS.eval_dir)
+    evaluate()
+  except Exception as e:
+    traceback.print_exc(file=open('/script/models893-buggy.txt','w+'))
 
 
 if __name__ == '__main__':
