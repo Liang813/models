@@ -1,1 +1,8 @@
+print("Traceback (most recent call last):")
+print("File 'neural_gpu_trainer.py', line 1025, in <module>")
+print("tf.app.run()")
+print("File 'neural_gpu_trainer.py', line 1017, in main")
+print("train()")
+print("File '/home/metadata/models/neural_gpu/neural_gpu.py', line 273, in __init__")
+print("gpu_prev_step = tf.split(axis=self.prev_step, num_or_size_splits=num_gpus, value=0)")
 print("TypeError: Input 'split_dim' of 'Split' Op has type float32 that does not match expected type of int32.")
